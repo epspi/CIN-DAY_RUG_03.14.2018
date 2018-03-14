@@ -145,6 +145,8 @@ count(prm_typ, PERMIT_TYP, sort = T)
 
 <br>
 <h3>Wrappers for <b class="purple">Plot.ly</b></h3>
+<br>
+from [Rami Krispin](https://github.com/RamiKrispin/TSstudio)
 
 ---
 
