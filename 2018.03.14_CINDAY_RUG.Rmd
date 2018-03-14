@@ -1,0 +1,85 @@
+---
+title:  "Recent Tools<br>for<br>Time Series<br>in <b>R</b>"
+author: "Eugene Pyatigorsky / Kroger R&D"
+date:   "<b>CIN-DAY RUG</b> March 2018"
+output: 
+  revealjs::revealjs_presentation:
+    incremental: true
+    theme: null
+    fig_caption: true
+    fig_width: 10
+    css: www/theme.css
+    includes: 
+      in_header: www/header.html
+    highlight: kate
+    center: true
+    transition: slide
+    reveal_options:
+      slideNumber: true
+      previewLinks: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = F, cache = T)
+
+library(tidyverse)
+library("wrapr")
+wrapr::defineLambda(name = "l")
+```
+
+
+## Agenda
+- tsibble
+- TSstudio
+- tidy quant
+- timetk
+- sweep time series models
+- timetibble
+
+
+
+## A little local data
+
+![Cincinnati Building Permits since 2010](figures/cinci_permits.png)
+
+## Fetch and wrangle
+
+```{r message=FALSE, warning=FALSE, include = F}
+data_file <- "data/permits.csv"
+data_url <- "https://data.cincinnati-oh.gov/api/views/uhjb-xac9/rows.csv?accessType=DOWNLOAD"
+
+# Download data if not already in place
+if (!file.exists(data_file)) download.file(data_url, data_file)
+
+permits <- read_csv(data_file) %>% 
+  select(
+    APP_DT = APPLIEDDATE,
+    # ISU_DT = ISSUEDDATE,
+    # CPL_DT = COMPLETEDDATE,
+    CITY = ORIGINALCITY,
+    STATE = ORIGINALSTATE,
+    ZIP = ORIGINALZIP,
+    HOOD = NEIGHBORHOOD,
+    DESC = DESCRIPTION,
+    PERMIT_CLS = PERMITCLASSMAPPED,
+    WORK_CLS = WORKCLASSMAPPED,
+    PERMIT_TYP = PERMITTYPEMAPPED,
+    UNITS,
+    FEE
+  ) %>% 
+  mutate_at(select_vars(names(.), contains("_DT")),
+            as.Date, format = "%m/%d/%Y") %>% 
+  # mutate_at(vars(DESCRIPTION, ORIGINALCITY, ORIGINALSTATE))
+  mutate_if(. %>% {class(.) == "character"},      # remove extra ""
+            . %>% {gsub('\\"', '', .)}) %>%       # in character cols
+  mutate(FEE = as.numeric(gsub("[$]", "", FEE)))
+  
+```
+
+
+```{r}
+glimpse(permits)
+```
+
+[Cincinnati Building Permits Dataset](https://data.cincinnati-oh.gov/Thriving-Healthy-Neighborhoods/Cincinnati-Building-Permits/uhjb-xac9/data)
+
