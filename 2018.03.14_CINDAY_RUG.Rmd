@@ -452,3 +452,9 @@ sw_glance(fit) %>% glimpse
 
 ## End
 
+<br>
+<br>
+<br>
+Find this presentation on Github:
+https://github.com/epspi/CIN-DAY_RUG_03.14.2018
+
