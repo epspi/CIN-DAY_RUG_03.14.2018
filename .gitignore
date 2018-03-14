@@ -35,3 +35,5 @@ vignettes/*.pdf
 # R Stuff
 /data/*
 data/*
+*_cache/*
+*_files/*
