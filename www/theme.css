@@ -1,20 +1,23 @@
-.multiCol {
-    display: table;
-    table-layout: fixed; // don't fudge depending on content
-    width: 100%;
-    text-align: left; // matter of taste, makes imho sense
-    .col {
-        display: table-cell;
-        vertical-align: top;
-        width: 50%;
-        padding: 2% 0 2% 3%; // some vertical, and between columns
-        &:first-of-type { padding-left: 0; } // there's nothing before col1
-    }
+.leftCol {
+  left:-8.33%;
+  text-align: left;
+  float: left;
+  width:50%;
+  z-index:-10;
 }
 
+.rightCol {
+  left:31.25%;
+  top: 75px;
+  float: right;
+  text-align: right;
+  z-index:-10;
+  width:50%;
+}
 /* Merriweather & Oxygen Font Styles */
 
 /* Black Mint colorscheme */
+
 
 .reveal {
   font-family: "Oxygen", sans-serif;
@@ -407,4 +410,77 @@
 
 .hljs-strong {
   font-weight: bold
+}
+
+
+
+
+@import url(//cdn.rawgit.com/tonsky/FiraCode/1.205/distr/fira_code.css);
+
+.reveal pre,
+.reveal code {
+    font-family: "Fira Code";
+    background-color: transparent;
+    color: inherit;
+    padding: 0;
+    /*color = currentColor; */
+}
+
+
+/* Code */
+/*
+code, pre {
+    font-family: "Fira Code", ;
+}
+*/
+
+.pink {
+  color: rgb(255, 0, 136);
+}
+.blue {
+    color: rgb(0, 170, 255);
+}
+.purple {
+    color: rgb(128, 85, 196);
+}
+.reveal p code,
+.reveal li code {
+    /*padding: .25em .5em;
+    font-size: 85%;
+    border-radius: 3px;
+    */
+    color: rgb(0, 170, 255);
+}
+
+.reveal p b,
+.reveal p strong,
+.reveal li strong,
+.reveal li b {
+  color: rgb(255, 0, 136);
+}
+
+
+pre {
+    display: block;
+    margin-top: 0;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    font-size: .8rem;
+    line-height: 1.4;
+    white-space: pre;
+    white-space: pre-wrap;
+    word-break: break-all;
+    word-wrap: break-word;
+    background-color: #f9f9f9;
+}
+
+.sourceCode {
+    border: 0;
+}
+
+pre code {
+    padding: 0;
+    font-size: 100%;
+    color: inherit;
+    background-color: transparent;
 }
