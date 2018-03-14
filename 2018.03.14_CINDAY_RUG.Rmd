@@ -207,7 +207,7 @@ ts_seasonal(prm_ts_mth, type = "box")
 
 ## Convenient type="all"
 
-```{r echo=T, warning=FALSE}
+```{r warning=FALSE}
 ts_seasonal(prm_ts_mth, type = "all")
 ```
 
@@ -418,7 +418,7 @@ class(daily_ts)
 
 
 
-## and back to tibble
+## ... and back to tibble
 ```{r, echo = T}
 tk_tbl(daily_ts, rename_index = "APP_DT")
 ```
@@ -447,7 +447,7 @@ sw_tidy(fit)
 ### glance at accuracy measures
 
 ```{r echo = T}
-sw_glance(fit)
+sw_glance(fit) %>% glimpse
 ```
 
 ## End
